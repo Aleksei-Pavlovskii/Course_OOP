@@ -1,0 +1,47 @@
+[
+    {
+        "name": "Python backend developer (Middle)",
+        "url": "https://hh.ru/vacancy/127608139",
+        "salary": 200000,
+        "experience": "От 3 до 6 лет",
+        "requirement": "3-5+ лет профессионального опыта в backend-разработке на <highlighttext>Python</highlighttext> и Django. Уверенный опыт работы с Celery и Redis...",
+        "city": "Санкт-Петербург",
+        "id": "127608139"
+    },
+    {
+        "name": "Ведущий Backend Разработчик Python\\Django",
+        "url": "https://hh.ru/vacancy/127623615",
+        "salary": 200000,
+        "experience": "Более 6 лет",
+        "requirement": "Имеет опыт от 5+ лет в роли Senior Backend Developer / Архитектора. Экспертиза в <highlighttext>Python</highlighttext> и микросервисах, понимание принципов других...",
+        "city": "Новосибирск",
+        "id": "127623615"
+    },
+    {
+        "name": "Python developer",
+        "url": "https://hh.ru/vacancy/126968140",
+        "salary": 200000,
+        "experience": "От 3 до 6 лет",
+        "requirement": "Знание <highlighttext>Python</highlighttext>. Понимание ООП. Знание CI/CD. Умение работать с чужим кодом. Понимание работы <highlighttext>Python</highlighttext> и умение использовать различные типы...",
+        "city": "Москва",
+        "id": "126968140"
+    },
+    {
+        "name": "Python-разработчик",
+        "url": "https://hh.ru/vacancy/127074791",
+        "salary": 200000,
+        "experience": "От 1 года до 3 лет",
+        "requirement": "Коммерческий опыт разработки на <highlighttext>Python</highlighttext> от 1 года. Практический опыт работы с FastAPI (или уверенное желание быстро его освоить). ",
+        "city": "Алматы",
+        "id": "127074791"
+    },
+    {
+        "name": "Backend-разработчик PHP, Python (работа из офиса в г. Самара)",
+        "url": "https://hh.ru/vacancy/127194150",
+        "salary": 200000,
+        "experience": "От 3 до 6 лет",
+        "requirement": "Понимание front-end части (JS, React/Vue) на уровне интеграции с API. Опыт с <highlighttext>Python</highlighttext> (Django / Flask) для аналитики или...",
+        "city": "Самара",
+        "id": "127194150"
+    }
+]
