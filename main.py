@@ -1,42 +1,67 @@
-# Создание экземпляра класса для работы с API сайтов с вакансиями
-from pprint import pprint
-
 from src.head_hunter_api import HeadHunterAPI
+from src.json import JSON
+from src.utils import (filter_vacancies, get_top_vacancies, get_user_time, get_vacancies_by_salary, sort_vacancies,
+                       sort_vacancies_city)
+from src.vacancy import Vacancy
 
-hh_api = HeadHunterAPI()
 
-# Получение вакансий с hh.ru в формате JSON
-hh_vacancies = hh_api.get_vacancies("python")
+def user_interaction() -> None:
+    """Функция для взаимодействия с пользователем"""
 
-# # Преобразование набора данных из JSON в список объектов
-# vacancies_list = Vacancy.cast_to_object_list(hh_vacancies)
-#
-# # Пример работы контструктора класса с одной вакансией
-# vacancy = Vacancy("Python Developer", "<https://hh.ru/vacancy/123456>", "100 000-150 000 руб.",
-# "Требования: опыт работы от 3 лет...")
-#
-# # Сохранение информации о вакансиях в файл
-# json_saver = JSONSaver()
-# json_saver.add_vacancy(vacancy)
-# json_saver.delete_vacancy(vacancy)
-#
-# # Функция для взаимодействия с пользователем
-# def user_interaction():
-#     platforms = ["HeadHunter"]
-#     search_query = input("Введите поисковый запрос: ")
-#     top_n = int(input("Введите количество вакансий для вывода в топ N: "))
-#     filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
-#     salary_range = input("Введите диапазон зарплат: ") # Пример: 100000 - 150000
-#
-#     filtered_vacancies = filter_vacancies(vacancies_list, filter_words)
-#
-#     ranged_vacancies = get_vacancies_by_salary(filtered_vacancies, salary_range)
-#
-#     sorted_vacancies = sort_vacancies(ranged_vacancies)
-#     top_vacancies = get_top_vacancies(sorted_vacancies, top_n)
-#     print_vacancies(top_vacancies)
+    print(get_user_time())
+
+    hh_api = HeadHunterAPI()
+
+    keyword = input("Введите ключевое слово для поиска вакансий: ")
+    hh_vacancies = hh_api.get_vacancies(keyword)
+
+    vacancies_list = Vacancy.cast_to_object_list(hh_vacancies)
+    json_file = JSON()
+
+    while True:
+        user_city_answer = input("Отсортировать по городу да/нет ")
+
+        if user_city_answer == "да":
+            city = input("Введите город: ")
+            sort_city = sort_vacancies_city(vacancies_list, city.lower())
+            break
+        elif user_city_answer == "нет":
+            sort_city = vacancies_list
+            break
+        else:
+            print("Неверный ввод")
+
+    filter_words = input("Введите ключевые слова для фильтрации вакансий через пробел: ").split()
+    salary_range = input('Введите диапазон зарплат через "-": ')  # Пример: 100000 - 150000
+
+    filtered_vacancies = filter_vacancies(sort_city, filter_words)
+
+    ranged_vacancies = get_vacancies_by_salary(filtered_vacancies, salary_range)
+    vacancies_sort = sort_vacancies(ranged_vacancies)
+
+    while True:
+        user_top = input("Введите количество, сколько отобразить вакансий: ")
+        if user_top.isdigit():
+            top_vacancies = get_top_vacancies(vacancies_sort, int(user_top))
+            break
+        else:
+            print("Нужно ввести число")
+
+    while True:
+        user_clear = input("Очистить файл перед отображением да/нет ")
+        if user_clear.lower() == "да":
+            json_file.clear_file()
+            json_file.save_to_file(top_vacancies)
+            break
+        elif user_clear.lower() == "нет":
+            json_file.save_to_file(top_vacancies)
+            break
+        else:
+            print("Неверный ввод")
+
+    for vacancy in top_vacancies:
+        print(vacancy)
 
 
 if __name__ == "__main__":
-    pprint(hh_vacancies)
-    # user_interaction()
+    user_interaction()
